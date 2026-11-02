@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ShiftSwap wireframes</title>
+<style>
+  :root {
+    --ink: #2b2b2b;
+    --line: #8a8a8a;
+    --fill: #e6e6e6;
+    --fill2: #f4f4f4;
+    --accent: #c9c9c9;
+    --bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+  }
+  .sheet {
+    display: flex;
+    gap: 28px;
+    padding: 28px;
+    align-items: flex-start;
+  }
+  .frame-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .label { font-size: 15px; font-weight: 600; color: #444; letter-spacing: .02em; }
+  .phone {
+    width: 300px;
+    height: 620px;
+    border: 2.5px solid var(--ink);
+    border-radius: 34px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .notch {
+    height: 22px; display: flex; justify-content: center; align-items: center;
+    font-size: 10px; color: #777; padding: 0 16px; flex: 0 0 auto;
+  }
+  .notch .pill { width: 90px; height: 10px; background: var(--ink); border-radius: 6px; }
+  .screen { flex: 1 1 auto; padding: 10px 16px 0; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .nav { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 17px; padding-top: 4px; }
+  .nav .back { font-weight: 400; font-size: 14px; color: #666; }
+  .nav .action { width: 26px; height: 26px; border: 2px solid var(--ink); border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size: 18px; line-height: 1; }
+  .h1 { font-size: 22px; font-weight: 700; text-align: center; margin-top: 50px; }
+  .sub { font-size: 12px; color: #666; text-align: center; }
+  .logo { width: 70px; height: 70px; border: 2px solid var(--ink); border-radius: 18px; margin: 30px auto 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .field { border: 1.8px solid var(--line); border-radius: 10px; height: 40px; padding: 0 12px; display: flex; align-items: center; font-size: 13px; color: #777; background: var(--fill2); }
+  .field.tall { height: 70px; align-items: flex-start; padding-top: 10px; }
+  .btn { height: 44px; border-radius: 12px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; }
+  .btn.ghost { background: transparent; border: 2px solid var(--ink); color: var(--ink); }
+  .btn.small { height: 36px; font-size: 13px; }
+  .link { text-align: center; font-size: 12px; color: #666; text-decoration: underline; }
+  .chips { display: flex; gap: 6px; }
+  .chip { font-size: 11px; border: 1.5px solid var(--line); border-radius: 999px; padding: 4px 10px; color: #555; background: var(--fill2); }
+  .chip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .card { border: 1.8px solid var(--line); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 5px; background: #fff; }
+  .card .row { display: flex; justify-content: space-between; align-items: center; }
+  .card .time { font-size: 15px; font-weight: 700; }
+  .card .meta { font-size: 11.5px; color: #666; }
+  .pill { font-size: 10.5px; border-radius: 999px; padding: 3px 9px; background: var(--fill); color: #333; font-weight: 600; }
+  .pill.dark { background: var(--ink); color: #fff; }
+  .pill.outline { background: transparent; border: 1.5px solid var(--line); }
+  .seg { display: flex; border: 1.8px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .seg div { flex: 1; text-align: center; font-size: 12px; padding: 7px 0; color: #555; }
+  .seg .on { background: var(--ink); color: #fff; }
+  .kv { display: flex; justify-content: space-between; font-size: 12.5px; padding: 8px 0; border-bottom: 1px solid #ddd; }
+  .kv b { font-weight: 600; }
+  .big { font-size: 26px; font-weight: 700; margin-top: 6px; }
+  .big-sub { font-size: 13px; color: #666; }
+  .note { font-size: 12px; color: #555; background: var(--fill2); border-radius: 10px; padding: 10px; border: 1.5px dashed var(--line); }
+  .spacer { flex: 1; }
+  .tabs { flex: 0 0 auto; border-top: 2px solid var(--ink); display: flex; height: 58px; background: #fff; }
+  .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 10px; color: #777; }
+  .tab .ico { width: 20px; height: 20px; border: 1.8px solid #999; border-radius: 5px; }
+  .tab.on { color: var(--ink); font-weight: 700; }
+  .tab.on .ico { border-color: var(--ink); background: var(--fill); }
+  .fab { position: absolute; right: 18px; bottom: 72px; width: 48px; height: 48px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 28px; line-height: 1; }
+  .mgr { font-size: 11px; color: #666; text-align: center; margin-top: 2px; }
+  .two { display: flex; gap: 8px; }
+  .two .btn { flex: 1; }
+  .avatar { width: 22px; height: 22px; border-radius: 50%; background: var(--fill); border: 1.5px solid var(--line); display: inline-block; vertical-align: middle; margin-right: 6px; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- 1 LOGIN -->
+  <div class="frame-wrap" id="s1">
+    <div class="phone">
+      <div class="notch"><span>9:41</span><div class="pill"></div><span>●●●</span></div>
+      <div class="screen">
+        <div class="logo">LOGO</div>
+        <div class="h1" style="margin-top:14px">ShiftSwap</div>
+        <div class="sub">Cover a shift. Claim a shift.</div>
+        <div style="height:18px"></div>
+        <div class="field">Email</div>
+        <div class="field">Password</div>
+        <div class="btn">Log In</div>
+        <div class="link">Don't have an account? Sign up</div>
+      </div>
+    </div>
+    <div class="label">1. Login / Sign Up</div>
+  </div>
+
+  <!-- 2 JOIN WORKPLACE -->
+  <div class="frame-wrap" id="s2">
+    <div class="phone">
+      <div class="notch"><span>9:41</span><div class="pill"></div><span>●●●</span></div>
+      <div class="screen">
+        <div class="h1">Join your workplace</div>
+        <div class="sub">Enter the invite code from your manager</div>
+        <div style="height:24px"></div>
+        <div class="field" style="justify-content:center; letter-spacing:.3em; font-size:18px; height:52px">A 7 K 2 Q</div>
+        <div class="btn">Join Workplace</div>
+        <div style="height:10px"></div>
+        <div class="note">Managers: tap here to create a new workplace and get a code to share.</div>
+        <div class="spacer"></div>
+      </div>
+    </div>
+    <div class="label">2. Join Workplace</div>
+  </div>
+
+  <!-- 3 FEED -->
+  <div class="frame-wrap" id="s3">
+    <div class="phone">
+      <div class="notch"><span>9:41</span><div class="pill"></div><span>●●●</span></div>
+      <div class="screen">
+        <div class="nav"><span>Open Shifts</span><span style="font-size:11px;font-weight:400;color:#666">Cafe Luna</span></div>
+        <div class="chips"><span class="chip on">All</span><span class="chip">Today</span><span class="chip">This week</span><span class="chip">My role</span></div>
+
+        <div class="card">
+          <div class="row"><span class="time">Tue Nov 4 · 4–10 PM</span><span class="pill dark">Server</span></div>
+          <div class="meta"><span class="avatar"></span>Posted by Maria · 2h ago</div>
+          <div class="row"><span class="meta">Need someone to close</span><span class="pill outline">Claim</span></div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="time">Wed Nov 5 · 7 AM–1 PM</span><span class="pill dark">Barista</span></div>
+          <div class="meta"><span class="avatar"></span>Posted by Dev · 5h ago</div>
+          <div class="row"><span class="meta">Opening shift</span><span class="pill outline">Claim</span></div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="time">Sat Nov 8 · 11 AM–5 PM</span><span class="pill dark">Server</span></div>
+          <div class="meta"><span class="avatar"></span>Posted by Jo · 1d ago</div>
+          <div class="row"><span class="meta">Brunch rush, tips are good</span><span class="pill outline">Claim</span></div>
+        </div>
+        <div class="card" style="opacity:.55">
+          <div class="row"><span class="time">Sun Nov 9 · 2–8 PM</span><span class="pill dark">Host</span></div>
+          <div class="meta"><span class="avatar"></span>Posted by Sam · 1d ago</div>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="fab">+</div>
+      <div class="tabs">
+        <div class="tab on"><div class="ico"></div>Feed</div>
+        <div class="tab"><div class="ico"></div>Post</div>
+        <div class="tab"><div class="ico"></div>My Shifts</div>
+        <div class="tab"><div class="ico"></div>Profile</div>
+      </div>
+    </div>
+    <div class="label">3. Shift Feed (Home)</div>
+  </div>
+
+  <!-- 4 POST -->
+  <div class="frame-wrap" id="s4">
+    <div class="phone">
+      <div class="notch"><span>9:41</span><div class="pill"></div><span>●●●</span></div>
+      <div class="screen">
+        <div class="nav"><span class="back">Cancel</span><span>Post a Shift</span><span class="back" style="font-weight:700">Post</span></div>
+        <div class="field">Date &nbsp;·&nbsp; Tue, Nov 4</div>
+        <div class="two"><div class="field" style="flex:1">Start · 4:00 PM</div><div class="field" style="flex:1">End · 10:00 PM</div></div>
+        <div class="field">Role &nbsp;·&nbsp; Server ▾</div>
+        <div class="field tall">Note (optional)<br><span style="font-size:11px;color:#aaa">e.g. closing shift, need someone by tomorrow</span></div>
+        <div class="note">Coworkers at Cafe Luna will get a notification when you post.</div>
+        <div class="spacer"></div>
+        <div class="btn">Post Shift</div>
+        <div style="height:6px"></div>
+      </div>
+      <div class="tabs">
+        <div class="tab"><div class="ico"></div>Feed</div>
+        <div class="tab on"><div class="ico"></div>Post</div>
+        <div class="tab"><div class="ico"></div>My Shifts</div>
+        <div class="tab"><div class="ico"></div>Profile</div>
+      </div>
+    </div>
+    <div class="label">4. Post Shift</div>
+  </div>
+
+  <!-- 5 DETAIL -->
+  <div class="frame-wrap" id="s5">
+    <div class="phone">
+      <div class="notch"><span>9:41</span><div class="pill"></div><span>●●●</span></div>
+      <div class="screen">
+        <div class="nav"><span class="back">‹ Back</span><span>Shift</span><span style="width:40px"></span></div>
+        <div class="big">Tue, Nov 4</div>
+        <div class="big-sub">4:00 PM – 10:00 PM · 6 hrs</div>
+        <div style="height:6px"></div>
+        <div class="kv"><span>Role</span><b>Server</b></div>
+        <div class="kv"><span>Posted by</span><b><span class="avatar"></span>Maria</b></div>
+        <div class="kv"><span>Status</span><span class="pill">Open</span></div>
+        <div class="note">"Need someone to close. I'll owe you one."</div>
+        <div class="spacer"></div>
+        <div class="btn">Claim This Shift</div>
+        <div class="mgr">Manager view: Approve / Decline buttons appear here once claimed</div>
+        <div class="two" style="opacity:.5"><div class="btn small">Approve</div><div class="btn small ghost">Decline</div></div>
+        <div style="height:6px"></div>
+      </div>
+    </div>
+    <div class="label">5. Shift Detail</div>
+  </div>
+
+  <!-- 6 MY SHIFTS -->
+  <div class="frame-wrap" id="s6">
+    <div class="phone">
+      <div class="notch"><span>9:41</span><div class="pill"></div><span>●●●</span></div>
+      <div class="screen">
+        <div class="nav"><span>My Shifts</span><span class="action">⚙</span></div>
+        <div class="seg"><div class="on">Claimed</div><div>Posted</div></div>
+
+        <div class="card">
+          <div class="row"><span class="time">Tue Nov 4 · 4–10 PM</span><span class="pill dark">Approved</span></div>
+          <div class="meta">Server · from Maria</div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="time">Sat Nov 8 · 11 AM–5 PM</span><span class="pill">Pending</span></div>
+          <div class="meta">Server · from Jo · waiting on manager</div>
+        </div>
+        <div class="card" style="opacity:.6">
+          <div class="row"><span class="time">Thu Oct 30 · 5–11 PM</span><span class="pill outline">Done</span></div>
+          <div class="meta">Server · from Dev</div>
+        </div>
+        <div class="spacer"></div>
+      </div>
+      <div class="tabs">
+        <div class="tab"><div class="ico"></div>Feed</div>
+        <div class="tab"><div class="ico"></div>Post</div>
+        <div class="tab on"><div class="ico"></div>My Shifts</div>
+        <div class="tab"><div class="ico"></div>Profile</div>
+      </div>
+    </div>
+    <div class="label">6. My Shifts</div>
+  </div>
+
+</div>
+</body>
+</html>
