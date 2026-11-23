@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function profile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.auth.uid == userId
+        && request.resource.data.isManager == false
+        && request.resource.data.workplaceId == "";
+    }
+
+    match /workplaces/{workplaceId} {
+      allow read: if signedIn();
+    }
+
+    match /shifts/{shiftId} {
+      allow read: if signedIn() && resource.data.workplaceId == profile().workplaceId;
+      allow create: if signedIn()
+        && request.resource.data.postedBy == request.auth.uid
+        && request.resource.data.workplaceId == profile().workplaceId
+        && request.resource.data.workplaceId != ""
+        && request.resource.data.status == "open"
+        && request.resource.data.claimedBy == null
+        && request.resource.data.role is string && request.resource.data.role.size() <= 50
+        && request.resource.data.note is string && request.resource.data.note.size() <= 500
+        && request.resource.data.startTime is timestamp
+        && request.resource.data.endTime is timestamp;
+    }
+  }
+}
