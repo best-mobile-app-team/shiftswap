@@ -65,7 +65,7 @@ export function buildShift(input: PostShiftInput, poster: User, now = new Date()
 }
 
 export async function postShift(
-  shifts: ShiftRepository,
+  shifts: Pick<ShiftRepository, "create">,
   input: PostShiftInput,
   poster: User,
   now = new Date(),
