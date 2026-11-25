@@ -1,9 +1,15 @@
 import { z } from "zod"
 
+const time = (error: string) =>
+  z
+    .string()
+    .regex(/^\d{2}:\d{2}(:\d{2}(\.\d{1,3})?)?$/, { error })
+    .transform((value) => value.slice(0, 5))
+
 export const postShiftSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, { error: "Pick a date." }),
-  startTime: z.string().regex(/^\d{2}:\d{2}$/, { error: "Pick a start time." }),
-  endTime: z.string().regex(/^\d{2}:\d{2}$/, { error: "Pick an end time." }),
+  startTime: time("Pick a start time."),
+  endTime: time("Pick an end time."),
   role: z
     .string()
     .trim()
