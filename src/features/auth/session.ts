@@ -31,6 +31,10 @@ export async function signIn({ auth, users }: SessionDeps, { email, password }: 
   return ensureProfile(users, await auth.signIn(email, password))
 }
 
+export function signOut({ auth }: Pick<SessionDeps, "auth">) {
+  return auth.signOut()
+}
+
 export function homePathFor(user: User) {
   return user.workplaceId ? "/feed" : "/join"
 }
