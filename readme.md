@@ -4,7 +4,7 @@ Original App Design Project
 # ShiftSwap
 
 **Group 7: Best Mobile App Team**
-Zachri Hall, Yuliya Orlinova, Edward Del Pino, Julian Lesesne
+Zachri Hall, Yulia Orlinova, Edward Del Pino, Julian Lesesne
 
 ## Table of Contents
 
