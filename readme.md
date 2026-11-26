@@ -184,12 +184,41 @@ Backend: Firebase Authentication for accounts and Cloud Firestore for workplaces
 
 This branch is a Next.js development preview, not a native iOS build. Existing Firebase code and rules are unchanged. The checkboxes above describe implemented preview features; newly added UI requires final local verification. Real push notifications and live Firebase integration remain incomplete.
 
+## Unit 9 – Demo Day Preparation
+
+### Team Demo Video
+
+https://www.youtube.com/watch?v=oFH9mZXtJJM
+
+The video demonstrates our team's progress, including:
+
+- User authentication
+- Shift posting and browsing
+- Role and day filtering
+- Shift details and claiming
+- Manager approval and rejection
+- Posted and claimed shift tracking
+- Employee profiles and notification preferences
+
+### Current Development Status
+
+Core employee and manager workflows have been manually tested in the development preview using mock services.
+
+### Next Sprint Goals
+
+- Verify live Firebase integration
+- Implement device push notifications
+- Complete automated testing
+- Resolve remaining bugs
+- Prepare for the final Demo Day presentation
+
 ### Progress recordings
 
 - [Zach — web application progress](progress/zach-progress.mp4)
 - [Edward — separate native iOS prototype progress](progress/edward-progress.mp4) (source integration not verified)
-- Yulia — recording pending.
-- Demo Day video (2–4 minutes): pending upload and link.
+- Yulia — https://github.com/user-attachments/assets/f1902b5e-0c79-4ba8-bc4b-8329c5b3580d
+
+- Demo Day video (2–4 minutes): https://www.youtube.com/watch?v=oFH9mZXtJJM 
 
 ### Run locally
 
