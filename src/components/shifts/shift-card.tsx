@@ -1,3 +1,7 @@
+"use client"
+import Link from "next/link"
+import { useServices } from "@/providers/services-provider"
+import { getDemo } from "@/services/mock-services"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -13,6 +17,7 @@ interface ShiftCardProps {
 }
 
 export function ShiftCard({ shift, badge, subtitle, muted }: ShiftCardProps) {
+  const demo = getDemo(useServices())
   return (
     <Card className={cn(muted && "opacity-50")}>
       <CardHeader>
@@ -22,6 +27,7 @@ export function ShiftCard({ shift, badge, subtitle, muted }: ShiftCardProps) {
           <Badge variant={muted ? "outline" : "default"}>{badge}</Badge>
         </CardAction>
       </CardHeader>
+      {demo && <CardContent><Link className="underline text-sm" href={`/shift/${shift.id}`}>View shift details</Link></CardContent>}
       {shift.note && <CardContent className="text-muted-foreground">{shift.note}</CardContent>}
     </Card>
   )

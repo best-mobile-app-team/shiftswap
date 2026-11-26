@@ -4,7 +4,7 @@ Original App Design Project
 # ShiftSwap
 
 **Group 7: Best Mobile App Team**
-Zachri Hall, Yuliya Orlinova, Edward Del Pino, Julian Lesesne
+Zachri Hall, Yulia Orlinova, Edward Del Pino, Julian Lesesne
 
 ## Table of Contents
 
@@ -34,22 +34,22 @@ ShiftSwap lets hourly workers hand off a shift they can't cover. A worker posts 
 
 **Required Features**
 
-1. User can sign up and log in with email and password.
-2. User can join a workplace using an invite code so they only see shifts from their own job.
-3. User can post a shift they need covered, with date, start time, end time, role and an optional note.
-4. User can view a feed of open shifts at their workplace, sorted by soonest first.
-5. User can tap a shift to see its details and claim it.
-6. A manager can approve or decline a claimed shift.
-7. User receives a push notification when a new shift is posted at their workplace and when their claim is approved or declined.
-8. User can view their own posted and claimed shifts in one place.
+- [x] User can sign up and log in with email and password. (development preview; final verification pending)
+- [x] User can join a workplace using an invite code so they only see shifts from their own job. (development preview; final verification pending)
+- [x] User can post a shift they need covered, with date, start time, end time, role and an optional note. (development preview; final verification pending)
+- [x] User can view a feed of open shifts at their workplace, sorted by soonest first. (development preview; final verification pending)
+- [x] User can tap a shift to see its details and claim it. (development preview; final verification pending)
+- [x] A manager can approve or decline a claimed shift. (development preview; final verification pending)
+- [ ] User receives a push notification when a new shift is posted at their workplace and when their claim is approved or declined. (simulated in-app alerts only; device push pending)
+- [x] User can view their own posted and claimed shifts in one place. (development preview; final verification pending)
 
 **Optional Features**
 
-1. User can filter the feed by role or by day.
-2. User can add an approved shift to their phone calendar.
-3. Workplace shows a simple history of completed swaps.
-4. User can belong to more than one workplace and switch between them.
-5. Manager can see which shifts are still uncovered within 24 hours and re-post them.
+- [x] User can filter the feed by role or by day.
+- [ ] User can add an approved shift to their phone calendar.
+- [ ] Workplace shows a simple history of completed swaps.
+- [ ] User can belong to more than one workplace and switch between them.
+- [ ] Manager can see which shifts are still uncovered within 24 hours and re-post them.
 
 ### 2. Screen Archetypes
 
@@ -179,3 +179,24 @@ To be added.
   - (Update) Set the user's `workplaceId`.
 
 Backend: Firebase Authentication for accounts and Cloud Firestore for workplaces and shifts, with a snapshot listener on the feed so new posts appear live. Push notifications via Firebase Cloud Messaging.
+
+## Unit 9 — Sprint progress
+
+This branch is a Next.js development preview, not a native iOS build. Existing Firebase code and rules are unchanged. The checkboxes above describe implemented preview features; newly added UI requires final local verification. Real push notifications and live Firebase integration remain incomplete.
+
+### Progress recordings
+
+- [Zach — web application progress](progress/zach-progress.mp4)
+- [Edward — separate native iOS prototype progress](progress/edward-progress.mp4) (source integration not verified)
+- Yulia — recording pending.
+- Demo Day video (2–4 minutes): pending upload and link.
+
+### Run locally
+
+Use the existing Node version that successfully ran this project (Node 26 on the development Mac). Run `npm ci`, `npm test`, `npx tsc --noEmit`, then `npm run dev`. Open http://localhost:3000/feed. Development mock mode is enabled by default; set `NEXT_PUBLIC_USE_MOCK_SERVICES=false` to opt out. Production mode still uses the original Firebase path. Demo data and accounts reset on full reload; use fake credentials only.
+
+Employee: `demo@example.com`; manager: `manager@example.com`; both use `demo123`. Sign out to switch accounts without refreshing. Sign up with a new fake email to test onboarding; invite code `TEST123`.
+
+### Verification
+
+Existing filter tests and manual checks passed on the development Mac before this update. Isolated mock workflow assertions passed after the update. Full dependency installation and browser/build verification of this revision were unavailable in the editing environment; run the checks above before submission.
