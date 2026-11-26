@@ -1,0 +1,37 @@
+import { describe, expect, it } from "vitest"
+import { createMockServices } from "./mock-services"
+describe("mock workplace workflow", () => {
+  it("validates invitations and isolates unjoined users", async () => {
+    const s = createMockServices()
+    const user = await s.auth.signUp("new@example.com", "demo123")
+    expect(await s.shifts.listOpen("demo-workplace")).toEqual([])
+    expect(() => s.demo.join("bad", "Server")).toThrow()
+    s.demo.join(" test123 ", "Server")
+    expect((await s.users.get(user.id))?.workplaceId).toBe("demo-workplace")
+    expect(await s.shifts.listOpen("demo-workplace")).toHaveLength(7)
+  })
+  it("claims once and permits only manager decisions", async () => {
+    const s = createMockServices()
+    expect(() => s.demo.claim("shift-7")).toThrow()
+    s.demo.claim("shift-1")
+    expect(() => s.demo.claim("shift-1")).toThrow()
+    expect(() => s.demo.decide("shift-1", "approved")).toThrow()
+    await s.auth.signIn("manager@example.com", "demo123")
+    expect(s.demo.pending().some(x => x.id === "shift-1")).toBe(true)
+    s.demo.decide("shift-1", "approved")
+    s.demo.decide("shift-8", "declined")
+    await s.auth.signIn("demo@example.com", "demo123")
+    expect(s.demo.getShift("shift-1").status).toBe("approved")
+    expect(s.demo.notifications()).toContain("Your shift claim was approved.")
+    expect(s.demo.notifications()).toContain("Your shift claim was declined.")
+  })
+  it("honors notification preferences", async () => {
+    const s = createMockServices()
+    s.demo.setNotifications(false)
+    await s.auth.signIn("manager@example.com", "demo123")
+    s.demo.decide("shift-8", "approved")
+    await s.auth.signIn("demo@example.com", "demo123")
+    expect(s.demo.notifications()).toEqual([])
+    expect(s.demo.notificationsEnabled()).toBe(false)
+  })
+})

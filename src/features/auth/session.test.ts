@@ -3,7 +3,7 @@ import type { AuthService } from "@/services/auth/auth-service"
 import type { User } from "@/types/models"
 import { authErrorMessage } from "./errors"
 import { credentialsSchema } from "./schema"
-import { homePathFor, signIn, signUp } from "./session"
+import { homePathFor, signIn, signOut, signUp } from "./session"
 
 const authUser = { id: "u1", email: "a@b.com" }
 const profile: User = { ...authUser, displayName: "", workplaceId: "w1", role: "", isManager: false }
@@ -29,6 +29,12 @@ describe("session", () => {
     const users = { get: vi.fn().mockResolvedValue(profile), create: vi.fn() }
     await expect(signIn({ auth: fakeAuth(), users }, { email: "a@b.com", password: "secret1" })).resolves.toBe(profile)
     expect(users.create).not.toHaveBeenCalled()
+  })
+
+  it("signs out through the auth service", async () => {
+    const auth = fakeAuth()
+    await signOut({ auth })
+    expect(auth.signOut).toHaveBeenCalledOnce()
   })
 
   it("routes users without a workplace to join", () => {

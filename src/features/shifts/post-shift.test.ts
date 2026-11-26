@@ -34,6 +34,17 @@ describe("buildShift", () => {
     expect(result.ok && result.shift.endTime).toEqual(new Date(2026, 10, 22, 6, 0))
   })
 
+  it("accepts times that include seconds", () => {
+    const result = buildShift({ ...input, startTime: "10:00:00", endTime: "14:00:00.000" }, poster, now)
+    expect(result.ok && result.shift.startTime).toEqual(new Date(2026, 10, 21, 10, 0))
+    expect(result.ok && result.shift.endTime).toEqual(new Date(2026, 10, 21, 14, 0))
+  })
+
+  it("rejects malformed times", () => {
+    const result = buildShift({ ...input, startTime: "10:30 AM", endTime: "" }, poster, now)
+    expect(result).toEqual({ ok: false, errors: { startTime: "Pick a start time.", endTime: "Pick an end time." } })
+  })
+
   it("requires a workplace", () => {
     const result = buildShift(input, { ...poster, workplaceId: "" }, now)
     expect(result).toEqual({ ok: false, errors: { form: "Join a workplace before posting a shift." } })

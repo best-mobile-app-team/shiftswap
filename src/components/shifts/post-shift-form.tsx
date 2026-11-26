@@ -49,8 +49,13 @@ export function PostShiftForm({ user }: { user: User }) {
     }
   }
 
+  function onChange(event: FormEvent<HTMLFormElement>) {
+    const field = (event.target as HTMLInputElement).name as PostShiftField
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev))
+  }
+
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={onSubmit} onChange={onChange} noValidate>
       <FieldGroup>
         <Field data-invalid={!!errors.date}>
           <FieldLabel htmlFor="date">Date</FieldLabel>
